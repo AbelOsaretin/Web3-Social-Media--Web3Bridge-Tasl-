@@ -28,6 +28,9 @@ contract SocialMedia is AccessControl {
     mapping(uint256 => mapping(address => PostStruct)) public UserNFTPost;
     mapping(address => UserDetails) public UserMapping;
 
+    PostStruct[] public postArray;
+    CommentStruct[] public Allcomment;
+
     // All Struct
 
     struct UserDetails {
@@ -40,8 +43,9 @@ contract SocialMedia is AccessControl {
     struct PostStruct {
         address CollectionAddress;
         string Post;
-        CommentStruct[] commentsArray;
+        
         uint256 TokenId;
+        CommentStruct[] CommentsArray;
     }
 
     struct CommentStruct {
@@ -78,7 +82,6 @@ contract SocialMedia is AccessControl {
         details.UserNFTCollection = address(createUser);
         UserMapping[msg.sender] = details;
         UserCollection[msg.sender] = address(createUser);
-        //IUserNFT(address(createUser)).transferOwnership(_user);
     }
 
     // Function for User to Create Post
@@ -92,13 +95,18 @@ contract SocialMedia is AccessControl {
             _post,
             UserNFTPostCounter[msg.sender]
         );
-        PostStruct memory postdetails;
+        PostStruct storage postdetails = UserNFTPost[
+            UserNFTPostCounter[msg.sender]
+        ][msg.sender];
         postdetails.CollectionAddress = UserCollection[msg.sender];
         postdetails.Post = _post;
         postdetails.TokenId = UserNFTPostCounter[msg.sender];
+
+        UserNFTPost[UserNFTPostCounter[msg.sender]][msg.sender] = postdetails;
+        postArray.push(postdetails);
     }
 
-    //Function to Comment on Post
+    // Function to Comment on Post
     function CommentOnPost(
         address _userAddress,
         uint256 _tokenid,
@@ -107,7 +115,8 @@ contract SocialMedia is AccessControl {
     ) external {
         CommentStruct memory comment = CommentStruct(_name, _comment);
         PostStruct storage addcomment = UserNFTPost[_tokenid][_userAddress];
-        addcomment.commentsArray.push(comment);
+        addcomment.CommentsArray.push(comment);
+        Allcomment.push(comment);
     }
 
     // // Function to receive ERC721 Tokens

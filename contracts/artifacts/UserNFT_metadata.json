@@ -410,6 +410,11 @@
 						"internalType": "string",
 						"name": "uri",
 						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
 					}
 				],
 				"name": "safeMint",
@@ -869,11 +874,11 @@
 			]
 		},
 		"contracts/UserNFT.sol": {
-			"keccak256": "0xbabc99c8af7641946efeb18a573b81636e55274a16568d91d2788a53d11f520d",
+			"keccak256": "0x22eb5d806f976d2280067f543950f62b54a8afff47f603bd2870c52d184fc895",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://1859d322d03b029be664375314c384c2975980e8ce3ae1f60558bf3ce8caa953",
-				"dweb:/ipfs/QmcopjQbC2cUZR12XawYkiK2ZueeQkph5g77k1dSg12Auq"
+				"bzz-raw://3198af0dda17981031e94b82cba8f2a4d9cde323df7e2fee76966ed2ac0a83b3",
+				"dweb:/ipfs/QmexYwqnFKG7cJHdoYHTYoVnhuLfWpo8rHqXCpTZhGqsK1"
 			]
 		}
 	},

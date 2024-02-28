@@ -17,8 +17,11 @@ contract UserNFT is ERC721, ERC721URIStorage, Ownable {
         return "Token URI";
     }
 
-    function safeMint(address to, string memory uri) public onlyOwner {
-        uint256 tokenId = _nextTokenId++;
+    function safeMint(
+        address to,
+        string memory uri,
+        uint256 tokenId
+    ) public onlyOwner {
         _safeMint(to, tokenId);
         _setTokenURI(tokenId, uri);
     }
