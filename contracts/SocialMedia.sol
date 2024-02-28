@@ -43,7 +43,6 @@ contract SocialMedia is AccessControl {
     struct PostStruct {
         address CollectionAddress;
         string Post;
-        
         uint256 TokenId;
         CommentStruct[] CommentsArray;
     }
@@ -113,6 +112,7 @@ contract SocialMedia is AccessControl {
         string memory _comment,
         string memory _name
     ) external {
+        require(hasRole(User, msg.sender), "You have not Created Account");
         CommentStruct memory comment = CommentStruct(_name, _comment);
         PostStruct storage addcomment = UserNFTPost[_tokenid][_userAddress];
         addcomment.CommentsArray.push(comment);
